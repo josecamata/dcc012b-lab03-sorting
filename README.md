@@ -1,29 +1,25 @@
-# Algoritmos de Ordenação (Parte 1)
+# Algoritmos de Ordenação (Parte 2)
 
 ## Objetivos:
-Aprender os algoritmos básicos de ordenação. 
+Aprender os algoritmos mais eficientes de ordenação. 
 
-Espera-se que ao final desta atividade você seja capaz de classificar informaçoes usando métodos básicos de ordenação e 
+Espera-se que ao final desta atividade você seja capaz de classificar informaçoes usando métodos mais eficientes de ordenação e 
 compreender os principais conceitos por tras dessas métodos.
+Alem disso, iremos comparar os métodos de ordenação usando as seguintes métricas: numero de comparações, movimentações 
+e tempo de processamento.
 
-## 📝 Métodos de Ordenação Básicos:
+## 📝 Métodos de Ordenação Eficientes:
 
 Os métodos básicos que iremos abordar nesta atividade são: 
- - [Método da Bolha](https://pt.wikipedia.org/wiki/Bubble_sort)
- - [Método da Seleção](https://pt.wikipedia.org/wiki/Selection_sort)
- - [Método da Inserção](https://pt.wikipedia.org/wiki/Insertion_sort) 
+ - [Método MergeSort](https://pt.wikipedia.org/wiki/Bubble_sort)
+ - [Método Quicksort](https://pt.wikipedia.org/wiki/Selection_sort)
+ - [Método HeapSort](https://pt.wikipedia.org/wiki/Insertion_sort) 
  
 ## O que deve ser feito? 
 
-### Pre-processamento:
-
-Deve concluir a implementação do método ImportCSVData da classe Siga. Esse método deve importar novos estudantes 
-a partir de um arquivo CSV em formanto ASCII.  os datalhes do que deve ser implementado está no arquivo siga.cc.
-
 ### Implementação dos Métodos de ordenação
-Os três métodos de ordenação supracitados deve ser implementados na pasta siga. Aqui, duas escolhas podem ser feitas: 
-(1) Usar funções templates. Assim, a sua codificação deve ser feita no arquivo [sort.h](siga/include/sort.h).
-(2) Caso optem por não usar funções tamplates, a condificação deve ser em include/sort.h e src/sort.cc
+Os três métodos de ordenação supracitados deve ser implementados no(s) mesmos(s) arquivo(s) onde foram codificados
+os métodos básicos de ordenação.
 
 A utilização dos métodos de ordenação se dará na chamada dos seguintes métodos da classe Siga:
 
