@@ -11,7 +11,7 @@
 using namespace std;
 
 
-typedef enum {BUBBLESORT, INSERTIONSORT, SELECTIONSORT } sorting_method;
+typedef enum {BUBBLESORT, INSERTIONSORT, SELECTIONSORT, MERGESORT, QUICKSORT} sorting_method;
 
 class Siga
 {
@@ -28,9 +28,12 @@ class Siga
         // TODO: Ordenação de Dados
         void ImportCSVData(string arquivo_csv);
         void SalvarListaOrdendaEstudantesPorNome(string arquivo_txt, sorting_method method);
-        void SalvarListaOrdenadaEstudantes(string arquivo_txt);
+        void SalvarListaOrdenadaEstudantesPorCurso(string arquivo_txt);
         ~Siga();
     private:
+    
+        Estudante* ExtractAllEstudants();
+    
         // atributos
         string   arquivo_nome;
         fstream  file_stream;
