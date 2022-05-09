@@ -28,9 +28,10 @@ Assim, como anteriormente a utilização dos métodos de ordenação se dará na
 Os detalhes do que deve ser implementado, encontra-se no arquivo [siga.cc](siga/src/siga.cc].
 
 Nessa atividade, além de implementação acima, vocês devem gerar um relatório de comparação entre os métodos.
-Deve ser reportado o número de comparações, número de movimentações de dados e o tempo de processamento.
+Para tanto, voces devem incluir na implementação dos métodos contadores do número de comparações e do número de movimentações de dados. 
+O tempo de processamento também deve ser calculado.
 
-O esse estudo comparativo deve ser implementado em tests/compara.cc. 
+Esse estudo comparativo deve ser implementado em tests/compara.cc. 
 
 
 ## Compilação e execução
