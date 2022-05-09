@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
         return 1;
     }
     Siga siga("dataset.bin");
-    siga.SalvarListaOrdendaEstudantesPorNome(argv[1], INSERTIONSORT);
+    siga.SalvarListaOrdendaEstudantesPorNome(argv[1], QUICKSORT);
     return 0;
 
 }
