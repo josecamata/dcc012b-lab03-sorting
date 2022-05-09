@@ -224,3 +224,13 @@ void Siga::SalvarListaOrdenadaEstudantesPorCurso(std::string arquivo_txt)
 
 }
 
+Estudante* Siga::ExtractAllEstudants()
+{
+    cout <<" Extraindo " << this->n_estudantes " registros de estudantes" << endl;
+    //TODO: Extrair todos em estudantes cadastrados do arquivo.
+    // 1. Alocar um vetor de estudante.
+    // 2. Ler os registros de estudantes do arquivo binário, armazenando-os no vetor.
+    // 3. Retornar o vetor.
+   
+}
+
