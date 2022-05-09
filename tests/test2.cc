@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
         return 1;
     }
     Siga siga("dataset.bin");
-    siga.SalvarListaOrdendaEstudantesPorNome(argv[1], BUBBLESORT);
+    siga.SalvarListaOrdendaEstudantesPorNome(argv[1], MERGESORT);
     return 0;
 
 }
