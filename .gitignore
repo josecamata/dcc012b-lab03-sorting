@@ -52,3 +52,5 @@ Mkfile.old
 dkms.conf
 tests/read_raw_data.cc
 tests/read
+build/
+
