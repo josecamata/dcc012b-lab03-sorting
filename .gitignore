@@ -54,3 +54,4 @@ tests/read_raw_data.cc
 tests/read
 build/
 
+dataset.bin

@@ -22,3 +22,6 @@ target_link_libraries(test7 PUBLIC siga)
 
 add_executable(test8 test8.cc)
 target_link_libraries(test8 PUBLIC siga)
+
+add_executable(compara compara.cc)
+target_link_libraries(compara PUBLIC siga)

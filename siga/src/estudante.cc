@@ -98,3 +98,29 @@ void Estudante::EscreverNoArquivoBinario(fstream &file)
     file.write((char*)&_codigo_curso, sizeof(_codigo_curso));
     file.write((char*)&_ira, sizeof(_ira));
 }
+
+
+bool CompareByMatricula(Estudante& a, Estudante& b)
+{
+    return a.ObterMatricula() < b.ObterMatricula();
+}
+
+bool CompareByNome(Estudante& a, Estudante& b)
+{
+    return strcmp(a.ObterNome(),b.ObterNome())<0;
+}
+
+bool CompareByIRA(Estudante& a, Estudante& b)
+{
+    return a.ObterIRA() < b.ObterIRA();
+}
+
+bool CompareByAnoIngresso(Estudante& a, Estudante& b)
+{
+    return a.ObterAnoIngresso() < b.ObterAnoIngresso();
+}
+
+bool CompareByCurso(Estudante& a, Estudante& b)
+{
+    return a.ObterCurso() < b.ObterCurso();
+}

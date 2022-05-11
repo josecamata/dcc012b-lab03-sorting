@@ -25,14 +25,13 @@ Assim, como anteriormente a utilização dos métodos de ordenação se dará na
  - SalvaListaOrdenadoPorNome()
  - SalvaListaOrdenadaEstudantesPorCurso()
 
-Os detalhes do que deve ser implementado, encontra-se no arquivo [siga.cc](siga/src/siga.cc].
+Os detalhes do que deve ser implementado, encontram-se no arquivo [siga.cc](siga/src/siga.cc).
 
-Nessa atividade, além de implementação acima, vocês devem gerar um relatório de comparação entre os métodos.
-Para tanto, voces devem incluir na implementação dos métodos contadores do número de comparações e do número de movimentações de dados. 
-O tempo de processamento também deve ser calculado.
-
-Esse estudo comparativo deve ser implementado em tests/compara.cc. 
-
+Nessa atividade, além de implementação acima, vocês devem gerar um relatório de comparação entre os métodos.Para tanto, vocês devem incluir na implementação 
+dos métodos de ordenação, contadores do número de comparações e do número de movimentações de dados.  O tempo de processamento também deve ser calculado. Uma estrutura para gerenciar essas metricas e rotinas auxiliares estão nos arquivos arquivos [metrics.h](siga/include/metrics.h) e [metrics.cc](siga/src/metrics.cc).
+Veja como o bubblesort foi implementado usando essas métricas de desempenho. A ideia é que vocês adaptem seus algoritmos seguindo esse padrão.
+Esse estudo comparativo deve ser implementado no arquivo [compara.cc](tests/compara.cc). 
+Lá está pronto o caso para o bubblesort. 
 
 ## Compilação e execução
 

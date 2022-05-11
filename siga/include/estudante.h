@@ -2,6 +2,7 @@
 #define ESTUDANTE_H__
 
 #include <fstream>
+#include <cstring>
 
 using namespace std;
 
@@ -38,6 +39,18 @@ class Estudante
         int    _codigo_curso;
         float  _ira;
 };
+
+
+
+bool CompareByMatricula(Estudante& a, Estudante& b);
+
+bool CompareByNome(Estudante& a, Estudante& b);
+
+bool CompareByIRA(Estudante& a, Estudante& b);
+
+bool CompareByAnoIngresso(Estudante& a, Estudante& b);
+
+bool CompareByCurso(Estudante& a, Estudante& b);
 
 
 #endif /* ESTUDANTE_H__ */

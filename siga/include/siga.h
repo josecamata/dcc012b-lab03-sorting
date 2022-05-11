@@ -30,9 +30,11 @@ class Siga
         void SalvarListaOrdendaEstudantesPorNome(string arquivo_txt, sorting_method method);
         void SalvarListaOrdenadaEstudantesPorCurso(string arquivo_txt);
         ~Siga();
+         Estudante* ExtractAllEstudants();
+         
     private:
     
-        Estudante* ExtractAllEstudants();
+       
     
         // atributos
         string   arquivo_nome;

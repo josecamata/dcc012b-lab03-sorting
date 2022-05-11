@@ -1,4 +1,7 @@
 #include <string>
+#include <vector>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -165,19 +168,39 @@ int Siga::ObterNumeroEstudantesArmazenados()
 
 void Siga::ImportCSVData(string file)
 {
-    cout << "Importando dados do arquivo " << file << endl;
-    int n_importados = 0; 
+     cout << "Importando dados do arquivo " << file << endl;
+    int n_importados = this->n_estudantes;
 
-    // TODO: 
-    // Abra um arquivo .csv com a seguinte formatação:
-    // Matricula;Nome;Ano de Ingresso;Curso;IRA
-    // Para cada linha do arquivo, criar um objeto Estudante e escrever no arquivo binário.
-
-    // Atualize o numero de registros no binário.
+    ifstream arq;
+    arq.open(file, ios::in);
+    if(!arq.is_open()){
+        cout << "FALHA AO ABRIR O ARQUIVO" << endl;
+        return;
+    }
+    string line;
+    getline(arq, line); // header line
+    while(getline(arq, line)){
+        stringstream ss(line);
+        string token;
+        vector<string> tokens;
+        while(getline(ss, token, ';')){
+            tokens.push_back(token);
+        }
+        if(tokens.size() == 5){
+            Estudante est;
+            est.TrocarMatricula(stoi(tokens[0]));
+            est.TrocarNome(tokens[1].c_str());
+            est.TrocarAnoIngresso(stoi(tokens[2]));
+            est.TrocarCurso(stoi(tokens[3]));
+            est.TrocarIRA(stof(tokens[4]));
+            this->CadastraEstudante(est);
+        }
+    }
+    n_importados = this->n_estudantes - n_importados;
+ 
     // Imprima o numero de estudantes importados:
     cout << "Importacao concluida: " << n_importados << " novos alunos cadastrados" << endl;
      
-    
 }
 
 void Siga::SalvarListaOrdendaEstudantesPorNome(string arquivo_txt, sorting_method method)
@@ -226,11 +249,17 @@ void Siga::SalvarListaOrdenadaEstudantesPorCurso(std::string arquivo_txt)
 
 Estudante* Siga::ExtractAllEstudants()
 {
-    cout <<" Extraindo " << this->n_estudantes " registros de estudantes" << endl;
+    cout <<" Extraindo " << this->n_estudantes << " registros de estudantes" << endl;
     //TODO: Extrair todos em estudantes cadastrados do arquivo.
     // 1. Alocar um vetor de estudante.
+    Estudante* est = new Estudante[this->n_estudantes];
     // 2. Ler os registros de estudantes do arquivo binário, armazenando-os no vetor.
+    this->file_stream.seekg(0, this->file_stream.beg);
+    for( int i = 0; i < this->n_estudantes; i++){
+        est[i].LerDoArquivoBinario(this->file_stream);
+    }
     // 3. Retornar o vetor.
-   
+    return est;
 }
+
 

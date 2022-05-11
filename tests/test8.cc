@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 
     Siga siga("dataset.bin");
     siga.ImportCSVData(argv[1]);
-    siga.SalvarListaOrdenadaEstudantes(argv[2]);
+    siga.SalvarListaOrdenadaEstudantesPorCurso(argv[2]);
 
     return 0;
 
