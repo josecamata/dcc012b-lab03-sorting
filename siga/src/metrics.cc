@@ -17,7 +17,7 @@ void PerformanceMetricsPrint(PerformanceMetrics* pm)
     cout << " Tempo de execução: "     << pm->time    << " segundos" << endl;
 #endif
     cout << " Comparacoes: " << pm->n_comp << endl;
-    cout << " Movimentações: "      << pm->n_swap << endl; 
+    cout << " Movimentacoes: "      << pm->n_swap << endl; 
 }
 
 void PerformanceMetricsCPUTime(PerformanceMetrics* pm, double time)
