@@ -30,7 +30,7 @@ void bubble_sort_internal(T* array, int size, bool (*compare)(T&, T&), Performan
             p->n_comp++;   // incrementa o número de comparações
             if (compare(array[j], array[j + 1]))
             {
-                p->n_swap++; // incrementa o número de trocas
+                p->n_swap+=3; // incrementa o número de trocas
                 swap(&array[j], &array[j + 1]);
             }
         }
