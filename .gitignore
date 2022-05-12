@@ -55,3 +55,4 @@ tests/read
 build/
 
 dataset.bin
+siga/include/config.h

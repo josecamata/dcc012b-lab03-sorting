@@ -10,7 +10,7 @@ typedef chrono::high_resolution_clock Clock;
 
 typedef struct {
     unsigned int n_comp;
-    unsigned int n_swap;
+    unsigned int n_mov;
     double time;
 } PerformanceMetrics;
 

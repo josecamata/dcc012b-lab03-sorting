@@ -30,7 +30,7 @@ void bubble_sort_internal(T* array, int size, bool (*compare)(T&, T&), Performan
             p->n_comp++;   // incrementa o número de comparações
             if (compare(array[j], array[j + 1]))
             {
-                p->n_swap+=3; // incrementa o número de trocas
+                p->n_mov+=3; // swap realiza tres movimentacao de dados
                 swap(&array[j], &array[j + 1]);
             }
         }
@@ -40,7 +40,7 @@ void bubble_sort_internal(T* array, int size, bool (*compare)(T&, T&), Performan
 
 
 template <typename T>
-void insert_sort(T* array, int size,  bool (*compare)(T&, T&))
+void insert_sort_internal(T* array, int size,  bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
     // TODO: Implementação do Insert Sort
     // Coloque aqui a implementação da atividade passada
@@ -48,7 +48,7 @@ void insert_sort(T* array, int size,  bool (*compare)(T&, T&))
 
 
 template <typename T>
-void selection_sort(T* array, int size, bool (*compare)(T&, T&))
+void selection_sort_internal(T* array, int size, bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
     // TODO: Implementação do selection Sort
     // Coloque aqui a implementação da atividade passada
@@ -57,16 +57,15 @@ void selection_sort(T* array, int size, bool (*compare)(T&, T&))
 
 
 template <typename T>
-void merge_sort(T* array, int size, bool (*compare)(T&, T&))
+void merge_sort_internal(T* array, int size, bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
     // TODO: Implementação do merge_sort
     // Coloque aqui a implementação da atividade passada
 }
 
 
-
 template <typename T>
-void quick_sort(T* array, int size, bool (*compare)(T&, T&))
+void quick_sort_internal(T* array, int size, bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
     // TODO: Implementação do quicksort
     // Coloque aqui a implementação da atividade passada
