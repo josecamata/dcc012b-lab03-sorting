@@ -1,1 +1,2 @@
-#cmakedefine CLASSROOM 
+#cmakedefine CLASSROOM
+#cmakedefine CPU_TIME

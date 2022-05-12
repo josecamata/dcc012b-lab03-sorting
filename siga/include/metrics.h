@@ -4,6 +4,8 @@
 #include <chrono>
 using namespace std;
 
+#include "config.h"
+
 typedef chrono::high_resolution_clock Clock;
 
 typedef struct {

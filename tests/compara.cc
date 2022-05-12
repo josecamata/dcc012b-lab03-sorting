@@ -22,8 +22,8 @@ int main(int argc, char* argv[])
     // insert_sort(list, n_estudantes, &CompareByNome);
     // merge_sort(list, n_estudantes, &CompareByNome);
     // quick_sort(list, n_estudantes, &CompareByNome);
-    // 2. Teste sua implementação com a chamada do qsort do C++
-
+    // 2. Teste sua implementação com a chamada do qsort do C++ e compare
+    // os tempos de processamento.
 
     delete [] list;
     return 0;
