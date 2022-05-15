@@ -6,26 +6,36 @@
 
 int main(int argc, char* argv[])
 {
-   // Abre o dataset 
-   Siga siga("dataset.bin");
-   siga.ImportCSVData(argv[1]);
+    // Abre o dataset 
+    Siga siga("dataset.bin");
   
     int n_estudantes = siga.ObterNumeroEstudantesArmazenados();
 
-    Estudante *list  = siga.ExtractAllEstudants();
+    Estudante *temp           = new Estudante[n_estudantes];
+    Estudante *estudantes     = siga.ExtractAllEstudantsFromDataSet();
 
-    bubble_sort(list, n_estudantes, &CompareByNome);
+    std::copy(estudantes, estudantes+n_estudantes, temp);
 
-    // TODO: 
-    // 1. Inserir chamada para os outros metodos:
-    // select_sort(list, n_estudantes, &CompareByNome);
-    // insert_sort(list, n_estudantes, &CompareByNome);
-    // merge_sort(list, n_estudantes, &CompareByNome);
-    // quick_sort(list, n_estudantes, &CompareByNome);
-    // 2. Teste sua implementação com a chamada do qsort do C++ e compare
-    // os tempos de processamento.
+    bubble_sort(temp, n_estudantes, &CompareByNome);
 
-    delete [] list;
+    std::copy(estudantes, estudantes+n_estudantes, temp);
+
+    selection_sort(temp, n_estudantes, &CompareByNome);
+
+    std::copy(estudantes, estudantes+n_estudantes, temp);
+
+    insertion_sort(temp, n_estudantes, &CompareByNome);
+
+    std::copy(estudantes, estudantes+n_estudantes, temp);
+    
+    merge_sort(temp, n_estudantes, &CompareByNome);
+
+    std::copy(estudantes, estudantes+n_estudantes, temp);
+    
+    quick_sort(temp, n_estudantes, &CompareByNome);
+ 
+    delete [] temp;
+    delete [] estudantes;
     return 0;
 }
   
