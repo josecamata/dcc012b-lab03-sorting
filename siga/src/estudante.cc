@@ -18,7 +18,17 @@ Estudante::Estudante(const char* nome, int matricula, int ano_ingresso, int curs
     _codigo_curso = curso;
     _ira          = ira;
 }
-        
+
+Estudante::Estudante(const Estudante& e)
+{
+    strcpy(_nome,e._nome);
+    _matricula    = e._matricula;
+    _ano_ingresso = e._ano_ingresso;
+    _codigo_curso = e._codigo_curso;
+    _ira          = e._ira;
+}
+
+
 int Estudante::ObterMatricula()
 {
     return this->_matricula;
@@ -107,7 +117,7 @@ bool CompareByMatricula(Estudante& a, Estudante& b)
 
 bool CompareByNome(Estudante& a, Estudante& b)
 {
-    return strcmp(a.ObterNome(),b.ObterNome())<0;
+    return (strcmp(a.ObterNome(),b.ObterNome())>0);
 }
 
 bool CompareByIRA(Estudante& a, Estudante& b)

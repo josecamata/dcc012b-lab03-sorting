@@ -1,5 +1,5 @@
-#ifndef SORT_H__
-#define SORT_H__
+#ifndef SORT_H
+#define SORT_H
 
 #include <chrono>
 #include <iostream>
@@ -10,12 +10,11 @@ using namespace std;
 
 // Use essa função para movimentar dados 
 template <typename T>
-void swap(T* a, T *b)
+void troca(T& a, T& b)
 {
-
-    T* tmp = a;
-    a      = b;
-    b      = tmp;
+    T tmp = a;
+    a     = b;
+    b     = tmp;
 }
 
 
@@ -23,15 +22,15 @@ template <typename T>
 void bubble_sort_internal(T* array, int size, bool (*compare)(T&, T&), PerformanceMetrics *p)  
 {
     // bubble sort
-    for (int i = 0; i < size; i++)
+    for (int i = size-2; i >= 0; i--)
     {
-        for (int j = 0; j < size - 1; j++)
+        for (int j = 0; j <= i; j++)
         {
             p->n_comp++;   // incrementa o número de comparações
             if (compare(array[j], array[j + 1]))
             {
                 p->n_mov+=3; // swap realiza tres movimentacao de dados
-                swap(&array[j], &array[j + 1]);
+                troca<T>(array[j], array[j + 1]);
             }
         }
     }
@@ -40,18 +39,38 @@ void bubble_sort_internal(T* array, int size, bool (*compare)(T&, T&), Performan
 
 
 template <typename T>
-void insert_sort_internal(T* array, int size,  bool (*compare)(T&, T&), PerformanceMetrics *p)
+void insertion_sort_internal(T* array, int size,  bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
-    // TODO: Implementação do Insert Sort
-    // Coloque aqui a implementação da atividade passada
+    // Implementação do Insert Sort
+    // TODO: Insira as metricas de performance
+    for (int i = 1; i < size; i++)
+    {
+        T key = array[i];
+        int j = i - 1;
+        while (j >= 0 && compare(key, array[j]))
+        {
+            array[j + 1] = array[j];
+            j = j - 1;
+        }
+        array[j + 1] = key;
+    }
 }
 
 
 template <typename T>
 void selection_sort_internal(T* array, int size, bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
-    // TODO: Implementação do selection Sort
-    // Coloque aqui a implementação da atividade passada
+    // TODO: Insira as metricas de performance
+        for (int i = 0; i < size; i++)
+    {
+        int min = i;
+        for (int j = i + 1; j < size; j++)
+        {
+            if (compare(array[j], array[min]))
+                min = j;
+        }
+        troca(array[i], array[min]);
+    }
 }
 
 
@@ -78,7 +97,7 @@ void bubble_sort(T* array, int size, bool (*compare)(T&, T&))
     PerformanceMetrics p;
     SetUpPerformanceMetrics(&p);
     auto t1 = Clock::now();
-    bubble_sort_internal(array, size, compare, &p);
+    bubble_sort_internal<T>(array, size, compare, &p);
     auto t2 = Clock::now();
     std::chrono::duration<double> diff = t2 - t1;
     PerformanceMetricsCPUTime(&p, diff.count());
@@ -86,4 +105,60 @@ void bubble_sort(T* array, int size, bool (*compare)(T&, T&))
     PerformanceMetricsPrint(&p);
 }
 
-#endif /* SORT_H__ */
+template <typename T>
+void insertion_sort(T* array, int size, bool (*compare)(T&, T&))  
+{
+    PerformanceMetrics p;
+    SetUpPerformanceMetrics(&p);
+    auto t1 = Clock::now();
+    insertion_sort_internal(array, size, compare, &p);
+    auto t2 = Clock::now();
+    std::chrono::duration<double> diff = t2 - t1;
+    PerformanceMetricsCPUTime(&p, diff.count());
+    cout << "Insertion Sort:" << endl; 
+    PerformanceMetricsPrint(&p);
+}
+
+template <typename T>
+void selection_sort(T* array, int size, bool (*compare)(T&, T&))  
+{
+    PerformanceMetrics p;
+    SetUpPerformanceMetrics(&p);
+    auto t1 = Clock::now();
+    selection_sort_internal(array, size, compare, &p);
+    auto t2 = Clock::now();
+    std::chrono::duration<double> diff = t2 - t1;
+    PerformanceMetricsCPUTime(&p, diff.count());
+    cout << "Selection Sort:" << endl; 
+    PerformanceMetricsPrint(&p);
+}
+
+template <typename T>
+void merge_sort(T* array, int size, bool (*compare)(T&, T&))  
+{
+    PerformanceMetrics p;
+    SetUpPerformanceMetrics(&p);
+    auto t1 = Clock::now();
+    merge_sort_internal(array, size, compare, &p);
+    auto t2 = Clock::now();
+    std::chrono::duration<double> diff = t2 - t1;
+    PerformanceMetricsCPUTime(&p, diff.count());
+    cout << "Merge Sort:" << endl; 
+    PerformanceMetricsPrint(&p);
+}
+
+template <typename T>
+void quick_sort(T* array, int size, bool (*compare)(T&, T&))  
+{
+    PerformanceMetrics p;
+    SetUpPerformanceMetrics(&p);
+    auto t1 = Clock::now();
+    quick_sort_internal(array, size, compare, &p);
+    auto t2 = Clock::now();
+    std::chrono::duration<double> diff = t2 - t1;
+    PerformanceMetricsCPUTime(&p, diff.count());
+    cout << "Quick Sort:" << endl; 
+    PerformanceMetricsPrint(&p);
+}
+
+#endif /* SORT_H */

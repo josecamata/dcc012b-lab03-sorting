@@ -1,5 +1,5 @@
-#ifndef ESTUDANTE_H__
-#define ESTUDANTE_H__
+#ifndef ESTUDANTE_H
+#define ESTUDANTE_H
 
 #include <fstream>
 #include <cstring>
@@ -14,6 +14,7 @@ class Estudante
     public:
         Estudante();
         Estudante(const char* nome, int matricula, int ano_ingresso, int curso, float ira);
+        Estudante(const Estudante& e);
 
         int         ObterMatricula();
         int         ObterAnoIngresso();
@@ -41,7 +42,6 @@ class Estudante
 };
 
 
-
 bool CompareByMatricula(Estudante& a, Estudante& b);
 
 bool CompareByNome(Estudante& a, Estudante& b);
@@ -53,4 +53,4 @@ bool CompareByAnoIngresso(Estudante& a, Estudante& b);
 bool CompareByCurso(Estudante& a, Estudante& b);
 
 
-#endif /* ESTUDANTE_H__ */
+#endif /* ESTUDANTE_H */

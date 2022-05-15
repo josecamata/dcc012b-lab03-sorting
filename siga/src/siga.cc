@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -12,8 +13,8 @@ using namespace std;
 Siga::Siga(string arquivo_dados_estudante)
 {
 
-    this->arquivo_nome = arquivo_dados_estudante;
-    this->file_stream.open(this->arquivo_nome, ios::in | ios::out | ios::binary );
+    this->nome_dataset = arquivo_dados_estudante;
+    this->file_stream.open(this->nome_dataset, ios::in | ios::out | ios::binary );
 
     if(this->file_stream.is_open())
     {
@@ -21,8 +22,16 @@ Siga::Siga(string arquivo_dados_estudante)
     }
     else
     {
-        cout << "SIGA: Erro ao abrir arquivo" << endl;
-        return; 
+        // arquivo não existe, cria um novo dataset.
+        this->file_stream.open(this->nome_dataset, ios::out | ios::trunc);
+        this->file_stream.close();
+
+        this->file_stream.open(this->nome_dataset, ios::in | ios::out | ios::binary );
+        if(!this->file_stream.is_open()) {
+            cout << "SIGA: Erro ao abrir arquivo" << endl;
+            exit(-1);
+        }
+        
     }
 
     cout << this->ObterNumeroEstudantesArmazenados() << " registros de estudantes" << endl;
@@ -84,7 +93,7 @@ void Siga::ImprimeEstudantePorMatricula(int matricula)
     }
 }
         
-void Siga::SalvaListaEstudanteEmTexto(string arquivo_txt)
+void Siga::ExportDataSetToCSV(string arquivo_txt)
 {
     //Cursor no inicio
     this->file_stream.seekg(0, this->file_stream.beg);
@@ -95,10 +104,11 @@ void Siga::SalvaListaEstudanteEmTexto(string arquivo_txt)
 
     //Abre o arquivo
     fstream arq;
-    arq.open(arquivo_txt, ios::in | ios::out | ios::trunc);
+    arq.open(arquivo_txt, ios::in | ios::trunc);
     if(!arq.is_open()){
         cout << "FALHA AO ABRIR O ARQUIVO" << endl;
-        return;
+        exit(-1);
+        //return;
     }
 
     //Cria um vetor de alunos
@@ -114,8 +124,7 @@ void Siga::SalvaListaEstudanteEmTexto(string arquivo_txt)
         arq << estudante.ObterNome() << ";";
         arq << estudante.ObterAnoIngresso() << ";";
         arq << estudante.ObterCurso() << ";";
-        arq << estudante.ObterIRA() << endl;
-
+        arq <<  (int)estudante.ObterIRA() << endl;
     }
 
     //Fechando o arquivo
@@ -133,7 +142,8 @@ void Siga::AlteraCadastroEstudante(Estudante est)
     //Caso nao encontrado imprime e retorna
     if ( index == -1 ){
         cout << "Estudante não cadastrado" << endl;
-        return;
+        exit(-1);
+        //return;
     }
 
     //Coloca o cursor no estudante que será reescrito
@@ -166,16 +176,16 @@ int Siga::ObterNumeroEstudantesArmazenados()
 }
 
 
-void Siga::ImportCSVData(string file)
+int Siga::ImportCSVData(string file)
 {
-     cout << "Importando dados do arquivo " << file << endl;
+     cout << "Importando dados do arquivo " << endl;
     int n_importados = this->n_estudantes;
 
     ifstream arq;
     arq.open(file, ios::in);
     if(!arq.is_open()){
         cout << "FALHA AO ABRIR O ARQUIVO" << endl;
-        return;
+        return -1;
     }
     string line;
     getline(arq, line); // header line
@@ -200,54 +210,79 @@ void Siga::ImportCSVData(string file)
  
     // Imprima o numero de estudantes importados:
     cout << "Importacao concluida: " << n_importados << " novos alunos cadastrados" << endl;
+    return n_importados;
      
 }
 
-void Siga::SalvarListaOrdendaEstudantesPorNome(string arquivo_txt, sorting_method method)
+void Siga::SalvarCSVOrdenadoPorNome(string arquivo_txt, sorting_method method)
 {
     // Iremos aplicar a ordenação na memoria, para isso faca:
     // 1. Ler todos os dados do arquivo binário colocando-os em um vetor
     // 2. Ordene o vetor usando o método de ordenação passado como parametro:
     //    - Ordenar por nome
+    Estudante* estudantes = ExtractAllEstudantsFromDataSet();
+
     switch(method){
         case BUBBLESORT:
-            // Ordenação por nome
+            bubble_sort<Estudante>(estudantes, this->n_estudantes, CompareByNome);
             break;
         case INSERTIONSORT:
-            // Ordenação por nome
+            insertion_sort<Estudante>(estudantes, this->n_estudantes, CompareByNome);
             break;
         case SELECTIONSORT:
-            // Ordenação por nome
+            selection_sort<Estudante>(estudantes, this->n_estudantes, CompareByNome);
             break;
         case MERGESORT:
-            // Ordenação por nome
+            merge_sort<Estudante>(estudantes, this->n_estudantes, CompareByNome);
             break;
         case QUICKSORT:
-            // Ordenação por nome
+            quick_sort<Estudante>(estudantes, this->n_estudantes, CompareByNome);
             break;
         default:
            cout << "metodo de ordenação não encontrado" << endl;
             break;
     }
-    // 3. Escrever o vetor ordenado no arquivo csv:
-    //    matricula;nome;ano de ingresso;curso;IRA
+    //ExportaVectorToCSV(estudantes, this->n_estudantes, arquivo_txt);
+
+    ofstream arq;
+    arq.open(arquivo_txt);
+    if(arq.is_open())
+    {
+        //arq << "matricula;nome;ano de ingresso;curso;IRA" << endl;
+        //Le o vetor de Estudantes
+        for( int i = 0; i < this->n_estudantes; i++)
+        {        
+            arq << estudantes[i].ObterMatricula() << ";";
+            arq << estudantes[i].ObterNome() << ";";
+            arq << estudantes[i].ObterAnoIngresso() << ";";
+            arq << estudantes[i].ObterCurso() << ";";
+            arq << (int) estudantes[i].ObterIRA() << endl   ; 
+        }
+        arq.close();
+    }
+    else
+    {
+        cout << "FALHA AO ABRIR O ARQUIVO" << endl;
+    }
+
+    delete [] estudantes;
 
 }
 
-void Siga::SalvarListaOrdenadaEstudantesPorCurso(std::string arquivo_txt)
+void Siga::SalvarCSVOrdenadoPorCursoENome(std::string arquivo_txt)
 {
-    // Iremos aplicar a ordenação na memoria, para isso faca:
-    // 1. Ler todos os dados do arquivo binário colocandos em um vetor
-    // 2. Ordenar o vetor usando a seguinte sequencia:
-    //    - Ordenar por nome 
-    //    - Ordenar por curso
-    // Observação: escolha métodos que sejam estáveis na segunda chamada de ordenação.
-    // 3. Escrever o vetor ordenado no arquivo csv 
-    //    matricula;nome;ano de ingresso;curso;IRA
+
+    Estudante* estudantes = ExtractAllEstudantsFromDataSet();
+    // TODO: observe que quicksort foi usado primeiro pois ele não é estável
+    quick_sort<Estudante>(estudantes, this->n_estudantes, CompareByNome);
+    merge_sort<Estudante>(estudantes, this->n_estudantes, CompareByCurso);
+
+    ExportaVectorToCSV(estudantes, this->n_estudantes, arquivo_txt);
+    delete [] estudantes;
 
 }
 
-Estudante* Siga::ExtractAllEstudants()
+Estudante* Siga::ExtractAllEstudantsFromDataSet()
 {
     cout <<" Extraindo " << this->n_estudantes << " registros de estudantes" << endl;
     //TODO: Extrair todos em estudantes cadastrados do arquivo.
@@ -260,6 +295,30 @@ Estudante* Siga::ExtractAllEstudants()
     }
     // 3. Retornar o vetor.
     return est;
+}
+
+void Siga::ExportaVectorToCSV(Estudante *E, int n, string file)
+{
+    ofstream arq;
+    arq.open(file);
+    if(arq.is_open())
+    {
+        //arq << "matricula;nome;ano de ingresso;curso;IRA" << endl;
+        //Le o vetor de Estudantes
+        for( int i = 0; i < this->n_estudantes; i++)
+        {        
+            arq << E[i].ObterMatricula() << ";";
+            arq << E[i].ObterNome() << ";";
+            arq << E[i].ObterAnoIngresso() << ";";
+            arq << E[i].ObterCurso() << ";";
+            arq << (int) E[i].ObterIRA() << endl   ; 
+        }
+        arq.close();
+    }
+    else
+    {
+        cout << "FALHA AO ABRIR O ARQUIVO" << endl;
+    }
 }
 
 

@@ -4,13 +4,10 @@
 int main(int argc, char *argv[])
 {
 
-    if(argc != 2)
-    {
-        cout << "Usage: " << argv[0] << " <output_file>" << endl;
-        return 1;
-    }
+    string input = INPUT_DIR + string("siga3000.csv");
     Siga siga("dataset.bin");
-    siga.ImportCSVData(argv[1]);
-    return 0;
-
+    int n_import = siga.ImportCSVData(input);
+    if(n_import == 3999)
+        return 0;
+    return -1;
 }

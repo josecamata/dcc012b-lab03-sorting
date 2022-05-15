@@ -1,5 +1,5 @@
-#ifndef METRICS_H__
-#define METRICS_H__
+#ifndef METRICS_H
+#define METRICS_H
 
 #include <chrono>
 using namespace std;
@@ -26,4 +26,4 @@ void PerformanceMetricsPrint(PerformanceMetrics* pm);
 
 
 
-#endif /* METRICS_H__ */
+#endif /* METRICS_H */
