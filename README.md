@@ -17,31 +17,28 @@ Os métodos básicos que iremos abordar nesta atividade são:
 ## O que deve ser feito? 
 
 ### Implementação dos Métodos Eficientes de Ordenação
+
 Os dois métodos de ordenação supracitados deve ser implementados no(s) mesmos(s) arquivo(s) onde foram codificados
-os métodos básicos de ordenação.
+os métodos básicos de ordenação. 
+Veja que no arquivo [sort.h](siga/include/sort.h) há comentátios *TODO* indicando os locais que devem ser modificados/implementados. 
 
-Assim, como anteriormente a utilização dos métodos de ordenação se dará na chamada dos seguintes métodos da classe Siga:
-
- - SalvaListaOrdenadoPorNome()
- - SalvaListaOrdenadaEstudantesPorCurso()
-
-Os detalhes do que deve ser implementado, encontram-se no arquivo [siga.cc](siga/src/siga.cc).
-
-Nessa atividade, além de implementação acima, vocês devem gerar um relatório de comparação entre os métodos.Para tanto, vocês devem incluir na implementação 
-dos métodos de ordenação, contadores do número de comparações e do número de movimentações de dados.  O tempo de processamento também deve ser calculado. Uma estrutura para gerenciar essas metricas e rotinas auxiliares estão nos arquivos arquivos [metrics.h](siga/include/metrics.h) e [metrics.cc](siga/src/metrics.cc).
-Veja como o bubblesort foi implementado usando essas métricas de desempenho. A ideia é que vocês adaptem seus algoritmos seguindo esse padrão.
-Esse estudo comparativo está no arquivo [test6.cc](tests/test6.cc). 
+Nessa atividade, além de implementação acima, vocês devem gerar um relatório de comparação entre os métodos.
+Para tanto, vocês devem incluir na implementação  dos métodos de ordenação, contadores do número de comparações e do número de movimentações de dados.  
+O tempo de processamento também deve ser calculado. Uma estrutura para gerenciar essas metricas e rotinas auxiliares estão nos arquivos arquivos [metrics.h](siga/include/metrics.h) e [metrics.cc](siga/src/metrics.cc).
+Veja como o **bubble_sort** foi implementado usando essas métricas de desempenho. 
+A ideia é que vocês adaptem seus algoritmos seguindo esse padrão.
+Esse estudo comparativo está obtido com o [test6.cc](tests/test6.cc). 
 
 ## Compilação e execução
 
 ```
 cmake -B build 
 cd build 
+make
 ctest
 ...
-
 ```
-O comando ctest irá executar o conjunto de testes unitaŕios para avaliar ssua implementação.
+O comando ctest irá executar o conjunto de testes unitário para avaliar sua implementação.
 Veja no arquivo [CMakeLists.txt](CMakeLists.txt) o que os testes estão fazendo.
 
 ```
@@ -68,6 +65,20 @@ Test project /home/camata/git/dcc012/dcc012b-lab03-sorting/build
 10/10 Test #10: Compara ..........................   Passed    0.98 sec
 
 100% tests passed, 0 tests failed out of 10
+```
+
+Vc poderá também executar os comandos de testes manualmente. Para tanto, entre no diretório build e chame as comandos:
+
+```
+
+rm -rf dataset.bin && touch dataset.bin
+./test/test1
+./test/test2
+./test/test3
+./test/test4
+./test/test5
+./test/test6
+
 ```
 
 
