@@ -15,8 +15,7 @@ int main(int argc, char *argv[])
     string input = INPUT_DIR + string("siga1000.csv");
     Siga siga("dataset.bin");
     int n_import = siga.ImportCSVData(input);
-    if(n_import == 1000)
-        return 0;
+    if(n_import == 978) return 0;
     return -1;
 }
 

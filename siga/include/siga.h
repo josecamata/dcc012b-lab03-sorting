@@ -26,6 +26,8 @@ class Siga
         // Pesquisa um estudante pelo número de matrícula.
         int  PesquisaPorMatricula(int matricula);
 
+        int PesquisaPorNome(const char* nome);
+
         // Busca por um estudante pela matricula e imprime seus dados.
         void ImprimeEstudantePorMatricula(int matricula);
 

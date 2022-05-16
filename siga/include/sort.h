@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 #include "metrics.h"
@@ -27,9 +28,10 @@ void bubble_sort_internal(T* array, int size, bool (*compare)(T&, T&), Performan
         for (int j = 0; j <= i; j++)
         {
             p->n_comp++;   // incrementa o número de comparações
-            if (compare(array[j], array[j + 1]))
+
+            if (compare(array[j+1], array[j]))
             {
-                p->n_mov+=3; // swap realiza tres movimentacao de dados
+                p->n_mov+=3; // troca realiza tres movimentacoes de dados
                 troca<T>(array[j], array[j + 1]);
             }
         }
@@ -42,7 +44,7 @@ template <typename T>
 void insertion_sort_internal(T* array, int size,  bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
     // Implementação do Insert Sort
-    // TODO: Insira as metricas de performance
+    // TODO: Insira as métricas de performance
     for (int i = 1; i < size; i++)
     {
         T key = array[i];
@@ -60,8 +62,8 @@ void insertion_sort_internal(T* array, int size,  bool (*compare)(T&, T&), Perfo
 template <typename T>
 void selection_sort_internal(T* array, int size, bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
-    // TODO: Insira as metricas de performance
-        for (int i = 0; i < size; i++)
+    // TODO: Insira as métricas de performance
+    for (int i = 0; i < size; i++)
     {
         int min = i;
         for (int j = i + 1; j < size; j++)
@@ -76,18 +78,19 @@ void selection_sort_internal(T* array, int size, bool (*compare)(T&, T&), Perfor
 
 
 template <typename T>
-void merge_sort_internal(T* array, int size, bool (*compare)(T&, T&), PerformanceMetrics *p)
+void mergesort_internal(T* array, int start, int end, bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
-    // TODO: Implementação do merge_sort
-    // Coloque aqui a implementação da atividade passada
+    // TODO: Implementar merge sort aqui
+
+
 }
 
 
 template <typename T>
-void quick_sort_internal(T* array, int size, bool (*compare)(T&, T&), PerformanceMetrics *p)
+void quicksort_internal(T* array, int low, int high, bool (*compare)(T&, T&), PerformanceMetrics *p)
 {
     // TODO: Implementação do quicksort
-    // Coloque aqui a implementação da atividade passada
+
 }
 
 
@@ -139,7 +142,7 @@ void merge_sort(T* array, int size, bool (*compare)(T&, T&))
     PerformanceMetrics p;
     SetUpPerformanceMetrics(&p);
     auto t1 = Clock::now();
-    merge_sort_internal(array, size, compare, &p);
+    mergesort_internal(array, 0, size-1, compare, &p);
     auto t2 = Clock::now();
     std::chrono::duration<double> diff = t2 - t1;
     PerformanceMetricsCPUTime(&p, diff.count());
@@ -153,7 +156,7 @@ void quick_sort(T* array, int size, bool (*compare)(T&, T&))
     PerformanceMetrics p;
     SetUpPerformanceMetrics(&p);
     auto t1 = Clock::now();
-    quick_sort_internal(array, size, compare, &p);
+    quicksort_internal(array, 0, size-1, compare, &p);
     auto t2 = Clock::now();
     std::chrono::duration<double> diff = t2 - t1;
     PerformanceMetricsCPUTime(&p, diff.count());

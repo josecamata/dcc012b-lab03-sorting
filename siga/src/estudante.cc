@@ -117,7 +117,7 @@ bool CompareByMatricula(Estudante& a, Estudante& b)
 
 bool CompareByNome(Estudante& a, Estudante& b)
 {
-    return (strcmp(a.ObterNome(),b.ObterNome())>0);
+    return (strcmp(a.ObterNome(),b.ObterNome())<0);
 }
 
 bool CompareByIRA(Estudante& a, Estudante& b)

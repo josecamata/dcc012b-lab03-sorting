@@ -60,11 +60,35 @@ int  Siga::PesquisaPorMatricula(int matricula)
     //Caso não encontrar a matrícula retorna -1
     return -1;
 }
+
+
+int  Siga::PesquisaPorNome(const char* nome)
+{
+    //Posicionando o cursor no inicio do arquivo
+    this->file_stream.seekg(0, this->file_stream.beg);
+
+    //Declarando Estudante
+    Estudante est = Estudante();
+
+    for ( int i = 0; i < this->n_estudantes; i++){
+        //Ler do arquivo binário
+        est.LerDoArquivoBinario(this->file_stream);
+        //Verifica se a matricula é a mesma
+        if (strcmp(est.ObterNome(), nome) == 0)
+            return i;
+    }
+
+    //Retornando o cursor pro fim de leitura
+    this->file_stream.seekg(0, this->file_stream.end);
+
+    //Caso não encontrar a matrícula retorna -1
+    return -1;
+}
         
 void Siga::CadastraEstudante(Estudante est)
 {
     //Verifica se est já está cadastrado
-    if( PesquisaPorMatricula(est.ObterMatricula() ) != -1 )
+    if( PesquisaPorNome(est.ObterNome() ) != -1 )
         return;
 
     //Colocando o Cursor no Fim
@@ -242,8 +266,8 @@ void Siga::SalvarCSVOrdenadoPorNome(string arquivo_txt, sorting_method method)
            cout << "metodo de ordenação não encontrado" << endl;
             break;
     }
-    //ExportaVectorToCSV(estudantes, this->n_estudantes, arquivo_txt);
-
+    ExportaVectorToCSV(estudantes, this->n_estudantes, arquivo_txt);
+/*
     ofstream arq;
     arq.open(arquivo_txt);
     if(arq.is_open())
@@ -264,6 +288,7 @@ void Siga::SalvarCSVOrdenadoPorNome(string arquivo_txt, sorting_method method)
     {
         cout << "FALHA AO ABRIR O ARQUIVO" << endl;
     }
+    */
 
     delete [] estudantes;
 

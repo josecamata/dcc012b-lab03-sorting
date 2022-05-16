@@ -30,21 +30,46 @@ Os detalhes do que deve ser implementado, encontram-se no arquivo [siga.cc](siga
 Nessa atividade, além de implementação acima, vocês devem gerar um relatório de comparação entre os métodos.Para tanto, vocês devem incluir na implementação 
 dos métodos de ordenação, contadores do número de comparações e do número de movimentações de dados.  O tempo de processamento também deve ser calculado. Uma estrutura para gerenciar essas metricas e rotinas auxiliares estão nos arquivos arquivos [metrics.h](siga/include/metrics.h) e [metrics.cc](siga/src/metrics.cc).
 Veja como o bubblesort foi implementado usando essas métricas de desempenho. A ideia é que vocês adaptem seus algoritmos seguindo esse padrão.
-Esse estudo comparativo deve ser implementado no arquivo [compara.cc](tests/compara.cc). 
-Lá está pronto o caso para o bubblesort. 
+Esse estudo comparativo está no arquivo [test6.cc](tests/test6.cc). 
 
 ## Compilação e execução
 
 ```
 cmake -B build 
-cmake --build build 
-./build/tests/test1 tests/input/siga1000.csv
+cd build 
+ctest
 ...
 
 ```
+O comando ctest irá executar o conjunto de testes unitaŕios para avaliar ssua implementação.
+Veja no arquivo [CMakeLists.txt](CMakeLists.txt) o que os testes estão fazendo.
 
-Veja os códigos dos testes para mais detalhes. Alguns testes, esperam arquivos de entradas e/ou saída 
-como argumento na linha comando!
+```
+Test project /home/camata/git/dcc012/dcc012b-lab03-sorting/build
+      Start  1: Setup
+ 1/10 Test  #1: Setup ............................   Passed    0.01 sec
+      Start  2: TestImportacao1000
+ 2/10 Test  #2: TestImportacao1000 ...............   Passed    0.13 sec
+      Start  3: TestMergeSort1000
+ 3/10 Test  #3: TestMergeSort1000 ................   Passed    0.01 sec
+      Start  4: MergeSortCompare
+ 4/10 Test  #4: MergeSortCompare .................   Passed    0.02 sec
+      Start  5: TestQuickSort1000
+ 5/10 Test  #5: TestQuickSort1000 ................   Passed    0.01 sec
+      Start  6: QuickSortCompare
+ 6/10 Test  #6: QuickSortCompare .................   Passed    0.02 sec
+      Start  7: Importe2000
+ 7/10 Test  #7: Importe2000 ......................   Passed    0.29 sec
+      Start  8: OrdenaCursoENome
+ 8/10 Test  #8: OrdenaCursoENome .................   Passed    0.02 sec
+      Start  9: OrdenaCursoENomeCompare
+ 9/10 Test  #9: OrdenaCursoENomeCompare ..........   Passed    0.01 sec
+      Start 10: Compara
+10/10 Test #10: Compara ..........................   Passed    0.98 sec
+
+100% tests passed, 0 tests failed out of 10
+```
+
 
 ## Como seu código será avaliado?
 
@@ -55,7 +80,7 @@ outros aspectos podem afetar a sua nota, a saber:
  - detectação de vazamentos de memória
  - Implementação ineficiente
 
-
-
+## Procure saber mais...
+Tente saber com os testes unitários foram implementados no CMakeList. 
 
 
